@@ -1,0 +1,134 @@
+<div class="main">
+
+  <div class="auth-container">
+
+    <div class="header">
+      <button class="auth-btn sign-up" (click)="onClickSignUp()">
+        <h1>Register</h1>
+      </button>
+      <button class="auth-btn login-up" (click)="onClickSignIn()">
+        <h1>Login</h1>
+      </button>
+    </div>
+    <!-- End of Header -->
+
+    <div class="body">
+
+      <ng-container *ngTemplateOutlet="activeTemplate"></ng-container>
+      <!-- Register -->
+      <ng-template #signup>
+
+        <div class="form-div">
+
+          <form class="form" [formGroup]="registerForm" (ngSubmit)="on_submit_register()">
+
+            <div class="form-details">
+              <!--      Username      -->
+              <div class="form-group">
+                <input type="text"
+                       name="username"
+                       class="form-element"
+                       placeholder="Username"
+                       formControlName="username">
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <input type="email"
+                       name="email"
+                       class="form-element"
+                       placeholder="Email"
+                       formControlName="email">
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <input type="password"
+                       name="password"
+                       class="form-element"
+                       placeholder="Password"
+                       formControlName="password">
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <input type="password"
+                       name="password"
+                       class="form-element"
+                       placeholder="Confirm Password"
+                       formControlName="confirm_password">
+              </div>
+
+            </div>
+            <div class="toast" *ngIf="message.length > 0">{{ message }}</div>
+
+            <div class="toast" *ngIf="register$ | async as register">
+              <div *ngIf="register.error">{{ register.error.message }}</div>
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-div">
+              <button type="submit"
+                      class="submit-button"
+                      [disabled]="!this.registerForm.valid"
+                      mat-raised-button>sign up</button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </ng-template>
+
+      <!-- Login -->
+      <ng-template #login>
+
+        <div class="form-div">
+          <form class="form" [formGroup]="signInForm" (ngSubmit)="on_submit_login()">
+
+            <div class="form-details">
+
+              <!-- Email -->
+              <div class="form-group">
+                <input type="text"
+                       name="email"
+                       class="form-element"
+                       placeholder="Email"
+                       formControlName="email">
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <input type="password"
+                       name="password"
+                       class="form-element"
+                       placeholder="password"
+                       formControlName="password">
+              </div>
+
+            </div>
+
+            <div class="toast" *ngIf="login$ | async as login">
+              <div *ngIf="login.error">{{ login.error.message }}</div>
+              <div *ngIf="login.response">{{ login }}</div>
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-div">
+              <button type="submit"
+                      class="submit-button"
+                      [disabled]="!this.signInForm.valid"
+                      mat-raised-button>Login</button>
+            </div>
+
+          </form>
+        </div>
+
+      </ng-template>
+
+    </div>
+
+  </div>
+  <!-- End of Auth Container -->
+
+</div>

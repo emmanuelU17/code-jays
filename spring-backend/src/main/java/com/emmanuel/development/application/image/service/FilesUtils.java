@@ -27,10 +27,10 @@ public class FilesUtils {
     public void save_to_folder(
             MultipartFile file,
             ImageEntity imageEntity,
+            InputStream inputStream,
             String fileName,
             Path uploadPath
     ) throws IOException {
-        InputStream inputStream = file.getInputStream();
         Path filePath = uploadPath.resolve(fileName);
         imageEntity.setName(file.getOriginalFilename());
         imageEntity.setPath(filePath.toAbsolutePath().toString());

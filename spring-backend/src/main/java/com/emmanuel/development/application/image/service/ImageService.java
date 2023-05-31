@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -44,9 +45,9 @@ public class ImageService {
         }
 
         ImageEntity imageEntity = new ImageEntity();
-        try {
+        try (InputStream inputStream = file.getInputStream()) {
             String name = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
-            this.filesUtils.save_to_folder(file, imageEntity, name, uploadPath);
+            this.filesUtils.save_to_folder(file, imageEntity, inputStream, name, uploadPath);
         } catch (IOException ex) {
             return new ResponseEntity<>("Error saving image " + ex.getMessage(), BAD_REQUEST);
         }
@@ -62,12 +63,13 @@ public class ImageService {
                 .stream()
                 .map(imageEntity -> {
                     ImageResponse imageResponse = null;
+                    Path path = Paths.get(imageEntity.getPath());
 
                     try {
                         imageResponse = new ImageResponse(
-                                Paths.get(imageEntity.getPath()).getFileName().toString(),
-                                Files.probeContentType(Paths.get(imageEntity.getPath())),
-                                Files.readAllBytes(Paths.get(imageEntity.getPath()))
+                                path.getFileName().toString(),
+                                Files.probeContentType(path),
+                                Files.readAllBytes(path)
                         );
                     } catch (IOException e) {
                         log.error("Error fetching images");
@@ -76,6 +78,11 @@ public class ImageService {
                     return imageResponse;
                 }) //
                 .toList();
+    }
+
+    /** Method returns the total images in our DB */
+    public int fetch_total_elements() {
+        return this.imageRepository.total();
     }
 
 }

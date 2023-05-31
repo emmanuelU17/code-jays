@@ -1,0 +1,100 @@
+.home-component {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-body {
+  height: 100%;
+}
+
+.home-body-container {
+  padding: 5px;
+}
+
+.home-body, .home-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-image-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  text-align: right;
+}
+
+.upload-button {
+  background-color: var(--good-life) !important;
+  color: var(--white) !important;
+}
+
+.home-body-container, .home-footer-container, .add-image-container, .images-container, .pagination-container {
+  width: 100%;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.image-card {
+  border-bottom: var(--cards-border);
+}
+
+.file-input {
+  display: none;
+}
+
+.action-btn-ctn {
+  display: flex;
+  gap: 3px;
+}
+
+.pagination-container {
+  padding: 5px;
+  text-align: center;
+  background-color: red;
+}
+
+@media screen and (max-width: 300px) {
+  .images-container {
+    gap: 2px;
+  }
+
+  .image-card {
+    width: 130px;
+  }
+}
+
+@media screen and (min-width: 301px) and (max-width: 900px) {
+  .home-body-container {
+    display: block;
+  }
+
+  .images-container {
+    gap: 3px;
+  }
+
+  .image-card {
+    width: 120px;
+  }
+}
+
+@media screen and (min-width: 901px) {
+  .images-container {
+    gap: 5px;
+  }
+
+  .image-card {
+    width: 200px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .home-body-container, .home-footer-container, .pagination-container {
+    width: var(--main-body-width);
+  }
+}

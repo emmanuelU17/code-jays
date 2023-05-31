@@ -1,0 +1,55 @@
+<div class="home-component">
+
+  <section class="home-body">
+    <div class="home-body-container">
+
+      <div class="add-image-container">
+
+        <!-- start of upload-container -->
+        <div class="upload-container" [ngStyle]="{
+         'display': (authService._isLoggedIn$() && authService._isAdmin$() | async) ? 'flex' : 'none'
+         }">
+          <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+          <div class="file-upload">
+            <button mat-raised-button class="upload-button" (click)="fileUpload.click()">New Image</button>
+            {{ file_name || "No file uploaded yet." }}
+          </div>
+          <!-- End of File Upload -->
+        </div>
+        <!-- end of upload-container -->
+        <div class="action-btn-ctn">
+          <button mat-raised-button class="upload-button sub" (click)="upload_image()"
+                  [ngStyle]="{ 'display': file_name.length > 0 ? 'block' : 'none'}">Submit</button>
+          <button mat-raised-button class="upload-button" (click)="cancel_upload()"
+                  [ngStyle]="{ 'display': file_name.length > 0 ? 'block' : 'none'}" >Cancel</button>
+        </div>
+      </div>
+      <!-- end of add-image-container -->
+
+      <div class="images-container">
+        <div class="image-card" *ngFor="let image of images$ | async">
+          <app-images [safeUrl]="image.url" [name]="image.image_name"></app-images>
+        </div>
+      </div>
+      <!-- end of images-container -->
+    </div>
+  </section>
+
+  <div class="pagination-container" *ngIf="this.total$ | async as total" >
+    <mat-paginator
+      [length]="total"
+      [pageSize]="this.size"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page"
+      (page)="changePage($event)"
+    ></mat-paginator>
+  </div>
+
+  <section class="home-footer">
+    <div class="home-footer-container">
+      <app-footer></app-footer>
+    </div>
+  </section>
+
+</div>

@@ -18,7 +18,7 @@ public class ImageController {
     }
 
     @PostMapping
-    public ResponseEntity<?> upload_image(@Param(value = "file")MultipartFile file) {
+    public ResponseEntity<?> upload_image(@Param(value = "file") MultipartFile file) {
         return this.imageService.upload_image(file);
     }
 
@@ -28,6 +28,11 @@ public class ImageController {
             @RequestParam(name = "size", defaultValue = "10") Integer size
     ) {
         return new ResponseEntity<>(this.imageService.fetch_images(page, size), OK);
+    }
+
+    @GetMapping(path = "/total", produces = "application/json")
+    public ResponseEntity<?> fetch_total_elements () {
+        return new ResponseEntity<>(this.imageService.fetch_total_elements(), OK);
     }
 
 }

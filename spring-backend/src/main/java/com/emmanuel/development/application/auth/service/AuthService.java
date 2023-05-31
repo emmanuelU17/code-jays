@@ -161,7 +161,7 @@ public class AuthService {
      * session is removed/ invalidated
      *
      * @param authentication of type Authentication
-     * @return void
+     * @return void - it just validates max session
      * */
     private void validateMaxSession(Authentication authentication) {
         // If max session is negative means unlimited session

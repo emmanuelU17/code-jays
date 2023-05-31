@@ -18,6 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
@@ -68,8 +69,13 @@ class ImageServiceTest {
         var response = this.imageService.upload_image(file);
         assertEquals("Uploaded", response.getBody());
         assertEquals(OK, response.getStatusCode());
-        verify(this.filesUtils, times(1))
-                .save_to_folder(any(MockMultipartFile.class), any(ImageEntity.class), anyString(), any(Path.class));
+        verify(this.filesUtils, times(1)).save_to_folder(
+                any(MockMultipartFile.class),
+                any(ImageEntity.class),
+                any(InputStream.class),
+                anyString(),
+                any(Path.class)
+        );
         verify(this.imageRepository, times(1)).save(any(ImageEntity.class));
     }
 
@@ -111,8 +117,13 @@ class ImageServiceTest {
 
         // When
         when(this.filesUtils.exists(any(Path.class))).thenReturn(true);
-        doThrow(IOException.class).when(this.filesUtils)
-                .save_to_folder(any(MockMultipartFile.class), any(ImageEntity.class), anyString(), any(Path.class));
+        doThrow(IOException.class).when(this.filesUtils).save_to_folder(
+                any(MockMultipartFile.class),
+                any(ImageEntity.class),
+                any(InputStream.class),
+                anyString(),
+                any(Path.class)
+        );
 
         // Then
         assertEquals(HttpStatus.BAD_REQUEST, this.imageService.upload_image(file).getStatusCode());
@@ -125,6 +136,41 @@ class ImageServiceTest {
 
         // Then
         assertEquals(imageService.fetch_images(0, 10).size(), page().getContent().size());
+    }
+
+    @Test
+    void total_elements() {
+        // Given
+        ImageEntity image1 = new ImageEntity();
+        image1.setId(UUID.randomUUID());
+        image1.setName("image1.jpg");
+        image1.setPath("uploads/image1.jpg");
+        image1.setImage_type("image/jpeg");
+
+        ImageEntity image2 = new ImageEntity();
+        image2.setId(UUID.randomUUID());
+        image2.setName("image2.jpg");
+        image2.setPath("uploads/image2.jpg");
+        image1.setImage_type("image/jpeg");
+
+        ImageEntity image3 = new ImageEntity();
+        image1.setId(UUID.randomUUID());
+        image1.setName("image3.jpg");
+        image1.setPath("uploads/image3.jpg");
+        image1.setImage_type("image/jpeg");
+
+        ImageEntity image4 = new ImageEntity();
+        image2.setId(UUID.randomUUID());
+        image2.setName("image4.jpg");
+        image2.setPath("uploads/image4.jpg");
+        image1.setImage_type("image/jpeg");
+
+        // When
+        when(this.imageRepository.total()).thenReturn(4);
+
+        // Then
+        assertEquals(4, this.imageService.fetch_total_elements());
+        verify(this.imageRepository, times(1)).total();
     }
 
     private Page<ImageEntity> page() {

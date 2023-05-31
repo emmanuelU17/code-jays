@@ -1,0 +1,130 @@
+.nav-header {
+  background-color: var(--white);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--header-shadow);
+}
+
+.nav-container .nav-links .action-links-container a:hover {
+  border-bottom: 2px solid #dddddd;
+}
+
+.nav-links.active {
+  display: block;
+}
+
+.nav-container .logo {
+  font-family: var(--nav-logo);
+}
+
+.routerLinkActive {
+  border-bottom: 2px solid var(--good-life);
+}
+
+/**** Start of Nav container ****/
+.nav-container {
+  display: flex;
+  padding: 10px 15px 0 15px;
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.action {
+  color: var(--black);
+}
+
+/**** Mobile view ****/
+@media only screen and (max-width: 900px) {
+  .nav-container {
+    width: 100%;
+    position: relative;
+    justify-content: space-between;
+  }
+
+  .burger-container {
+    margin-right: 15px;
+    vertical-align: bottom;
+  }
+
+  .nav-links {
+    display: none;
+    background-color: var(--white);
+    border: var(--button-border);
+    position: absolute;
+    top: 50px
+  }
+
+  .action {
+    width: 100%;
+    margin-right: 20px;
+    padding: calc(3px + 1vw);
+  }
+
+  .action-links-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo, .link {
+    font-size: calc(10px + 1.5vw);
+    text-decoration: none;
+  }
+
+  .logo {
+    color: var(--good-life);
+  }
+
+  .auth-display {
+    width: 30%;
+    text-align: right;
+  }
+}
+
+/**** None Mobile view ****/
+@media screen and (min-width: 901px) {
+  .nav-container {
+    width: 100%;
+  }
+
+  .logo-container {
+    width: 20%;
+  }
+
+  .nav-links {
+    display: flex;
+    width: 60%;
+  }
+
+  .burger-container {
+    display: none;
+  }
+
+  .action {
+    margin-right: 40px;
+  }
+
+  .logo, .link {
+    font-size: 18px;
+  }
+
+  .logo {
+    color: var(--good-life);
+  }
+
+  .auth-display {
+    width: 20%;
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .nav-container {
+    width: var(--main-body-width);
+  }
+
+}

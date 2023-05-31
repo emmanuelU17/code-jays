@@ -55,6 +55,18 @@ class ImageControllerTest {
         this.imageService.upload_image(new MockMultipartFile(
            "file", "image1.jpeg", "image/jpeg", "Test image upload".getBytes()
         ));
+        this.imageService.upload_image(new MockMultipartFile(
+                "file", "image3.jpeg", "image/jpeg", "Test image upload".getBytes()
+        ));
+        this.imageService.upload_image(new MockMultipartFile(
+                "file", "image4.jpeg", "image/jpeg", "Test image upload".getBytes()
+        ));
+        this.imageService.upload_image(new MockMultipartFile(
+                "file", "image5.jpeg", "image/jpeg", "Test image upload".getBytes()
+        ));
+        this.imageService.upload_image(new MockMultipartFile(
+                "file", "image6.jpeg", "image/jpeg", "Test image upload".getBytes()
+        ));
     }
 
     @AfterEach
@@ -82,6 +94,15 @@ class ImageControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$.length()").value(1));
+                .andExpect(jsonPath("$.length()").value(5));
     }
+
+    @Test
+    void total_elements() throws Exception {
+        this.MOCK_MVC
+                .perform(get("/api/v1/image/total"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("5"));
+    }
+
 }

@@ -1,4 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html {
+  overflow-x: hidden;
+}
+
+:root {
+  --main-body-width: 55%;
+  --subtitle-font: 'Montserrat', sans-serif;
+  --button-font: 'Roboto', sans-serif;
+  --footer-btn-background: #686868;
+  --border-line-colour: #ddd;
+  --white: #fff;
+  --modal-background: #fefefe;
+  --red: red;
+  --blue: blue;
+  --good-life: #fa8c5c;
+  --button-border: 3px solid #ddd;
+  --modal-border: 3px solid #ddd;
+  --cards-border: 1px solid #ddd;
+  --link-border-buttom: 1px solid var(--good-life);
+  --form-input-background: #F3F3F3;
+  --dashboard-left-column: #00BFFF;
+  --active-dashboard-left-column: #89CFF0;
+  --highlight-dates: 1px solid blue;
+  --invalid: 1px solid red !important;
+  --search-border: 1px solid black;
+  --nav-background: #454234;
+  --colour-black: black;
+  --colour-yellow: yellow;
+  --nav-font-family: 'Roboto', sans-serif;
+  --nav-logo: 'Dancing Script', cursive;
+  --header-shadow: 0 0 5px grey;
+  --hover-background: black;
+  --mainFont: #e5dd69;
+  --black: #050505;
+  --btn: #2c3e4c;
+  --allbackground: hsl(210, 36%, 96%);
+  --hoverFont: #e5dd69;
+  --lightgrey: #F5F5F5;
+  --facebook: #4267B2;
+  --scrollback: #777777;
+  --transit: 0s;
+  --transitBtn: 0.5s;
+  --h3-h4-font: 18px;
+  /*** Nav Bar <-> Product body***/
+  --left-column: 20%;
+  --right-column: 80%;
+}
