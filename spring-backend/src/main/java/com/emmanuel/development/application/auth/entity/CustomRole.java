@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomRoles implements Serializable {
+public class CustomRole implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,14 +26,13 @@ public class CustomRoles implements Serializable {
 
     @ManyToOne
     @JoinColumn(
-            name = "employee_id",
+            name = "user_id",
             nullable = false,
-            referencedColumnName = "employee_id",
-            foreignKey = @ForeignKey(name = "role_employee_fk")
+            referencedColumnName = "user_id"
     )
-    private AppUser employee;
+    private AppUser appUser;
 
-    public CustomRoles(RoleEnum roleEnum) {
+    public CustomRole(RoleEnum roleEnum) {
         this.roleEnum = roleEnum;
     }
 

@@ -2,7 +2,7 @@ package com.emmanuel.development.application.auth.service;
 
 import com.emmanuel.development.application.auth.dto.AuthDTO;
 import com.emmanuel.development.application.auth.entity.AppUser;
-import com.emmanuel.development.application.auth.entity.CustomRoles;
+import com.emmanuel.development.application.auth.entity.CustomRole;
 import com.emmanuel.development.application.auth.repository.AppUserRepository;
 import com.emmanuel.development.application.auth.response.AuthResponse;
 import com.emmanuel.development.application.enumeration.RoleEnum;
@@ -103,14 +103,15 @@ public class AuthService {
         var user = new AppUser();
         user.setEmail(email);
         user.setPassword(passwordEncoder.encode(dto.password()));
+        user.setProfilePicture("");
         user.setLocked(true); // true if not locked
         user.setAccountNonExpired(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true); // false for email validation
-        user.addRole(new CustomRoles(RoleEnum.USER));
+        user.addRole(new CustomRole(RoleEnum.USER));
 
         if (ADMIN_EMAIL.equals(email)) {
-            user.addRole(new CustomRoles(RoleEnum.ADMIN));
+            user.addRole(new CustomRole(RoleEnum.ADMIN));
         }
 
         appUserRepository.save(user);

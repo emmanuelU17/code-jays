@@ -14,6 +14,6 @@ export class ImagesComponent {
 
   @Input() safeUrl?: SafeUrl;
 
-  @Input() name: string = '';
+  @Input() name?: string;
 
 }

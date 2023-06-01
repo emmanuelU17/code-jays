@@ -77,9 +77,12 @@ class ImageControllerTest {
     @Test
     void upload_image() throws Exception {
         this.MOCK_MVC
-                .perform(multipart("/api/v1/image").file(new MockMultipartFile(
-                        "file", "image2.jpeg",
-                "image/jpeg", "Test image upload".getBytes()
+                .perform(multipart("/api/v1/image").file(
+                        new MockMultipartFile(
+                                "file",
+                                "image2.jpeg",
+                                "image/jpeg",
+                                "Test image upload".getBytes()
                 )))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Uploaded"));

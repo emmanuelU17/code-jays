@@ -117,23 +117,4 @@ export class AuthService {
       }));
   }
 
-  /**
-   * Makes an api call to our server to log out
-   *
-   * @return Observable
-   * */
-  logoutApi(): Observable<any> {
-    return this
-      .http
-      .post(
-        this.HOST + "/api/v1/auth/logout",
-        '',
-        {
-          headers: { 'content-type': 'application/json' },
-          observe: 'response',
-          withCredentials: true
-        }
-      );
-  }
-
 }

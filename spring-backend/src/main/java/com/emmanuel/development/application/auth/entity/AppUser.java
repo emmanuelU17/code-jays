@@ -18,16 +18,13 @@ import java.util.stream.Collectors;
 import static jakarta.persistence.CascadeType.*;
 import static jakarta.persistence.FetchType.EAGER;
 
-@Table @Entity
-@NoArgsConstructor
-@Getter
-@Setter
+@Entity @Table(name = "app_user") @NoArgsConstructor @Getter @Setter
 public class AppUser implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
-    private Long employeeID;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -36,7 +33,10 @@ public class AppUser implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "account_enable")
+    @Column(name = "profile_picture_path")
+    private String profilePicture;
+
+    @Column(name = "account_enabled")
     private boolean enabled;
 
     @Column(name = "credentials_expired")
@@ -48,13 +48,17 @@ public class AppUser implements Serializable {
     @Column(name = "account_locked")
     private boolean locked;
 
-    @JsonIgnore
-    @OneToMany(cascade = {PERSIST, MERGE, REMOVE}, fetch = EAGER, mappedBy = "employee", orphanRemoval = true)
-    private Set<CustomRoles> roles = new HashSet<>();
+    @OneToOne(cascade = ALL)
+    @JoinColumn(name = "password_token_id", referencedColumnName = "password_reset_token_id")
+    private PasswordResetToken passwordToken;
 
-    public void addRole(CustomRoles role) {
+    @JsonIgnore
+    @OneToMany(cascade = {PERSIST, MERGE, REMOVE}, fetch = EAGER, mappedBy = "appUser", orphanRemoval = true)
+    private Set<CustomRole> roles = new HashSet<>();
+
+    public void addRole(CustomRole role) {
         this.roles.add(role);
-        role.setEmployee(this);
+        role.setAppUser(this);
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -68,30 +72,32 @@ public class AppUser implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AppUser employee)) return false;
-        return isEnabled() == employee.isEnabled()
-                && isCredentialsNonExpired() == employee.isCredentialsNonExpired()
-                && isAccountNonExpired() == employee.isAccountNonExpired()
-                && isLocked() == employee.isLocked()
-                && Objects.equals(getEmployeeID(), employee.getEmployeeID())
-                && Objects.equals(getEmail(), employee.getEmail())
-                && Objects.equals(getPassword(), employee.getPassword())
-                && Objects.equals(getRoles(), employee.getRoles());
+        if (!(o instanceof AppUser user)) return false;
+        return isEnabled() == user.isEnabled()
+                && isCredentialsNonExpired() == user.isCredentialsNonExpired()
+                && isAccountNonExpired() == user.isAccountNonExpired()
+                && isLocked() == user.isLocked()
+                && Objects.equals(getUserId(), user.getUserId())
+                && Objects.equals(getEmail(), user.getEmail())
+                && Objects.equals(getPassword(), user.getPassword())
+                && Objects.equals(getProfilePicture(), user.getProfilePicture())
+                && Objects.equals(getPasswordToken(), user.getPasswordToken())
+                && Objects.equals(getRoles(), user.getRoles());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                getEmployeeID(),
+                getUserId(),
                 getEmail(),
                 getPassword(),
+                getProfilePicture(),
                 isEnabled(),
                 isCredentialsNonExpired(),
                 isAccountNonExpired(),
                 isLocked(),
+                getPasswordToken(),
                 getRoles()
         );
     }
-
-
 }

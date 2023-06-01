@@ -1,0 +1,87 @@
+<section class="account-component">
+
+  <div class="profile-container">
+
+    <div class="title-container">
+      <h1 class="title">Add profile picture</h1>
+    </div>
+
+    <div class="upload-container" >
+      <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+      <div class="file-upload">
+        {{ file_name || "No file uploaded yet." }}
+        <button mat-mini-fab color="primary" (click)="fileUpload.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </div>
+      <!-- End of File Upload -->
+    </div>
+
+    <div class="toast" *ngIf="picture$ | async as picture">
+      <div *ngIf="picture.error">{{ picture.error.message }}</div>
+    </div>
+
+    <div class="action-btn-ctn">
+      <button type="button" mat-raised-button class="upload-button sub" (click)="upload_profile_picture()"
+      >Create</button>
+      <button type="button" mat-raised-button class="upload-button" (click)="cancel_upload()"
+      >Cancel</button>
+    </div>
+
+  </div>
+
+  <div class="password-container">
+
+    <div class="title-container">
+      <h1 class="title">Reset Password</h1>
+    </div>
+
+    <div class="form-div">
+      <form class="form" [formGroup]="resetForm" (ngSubmit)="on_submit_reset_password()">
+
+        <div class="form-details">
+
+          <!-- Email -->
+          <div class="form-group">
+            <input type="password"
+                   name="password"
+                   class="form-element"
+                   placeholder="password"
+                   formControlName="password">
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <input type="password"
+                   name="confirm_password"
+                   class="form-element"
+                   placeholder="Confirm password"
+                   formControlName="confirm_password">
+          </div>
+
+        </div>
+
+        <div class="toast" *ngIf="message.length > 0">{{ message }}</div>
+        <div class="toast" *ngIf="reset_password$ | async as reset_password">
+          <div *ngIf="reset_password.error">{{ reset_password.error.message }}</div>
+        </div>
+
+        <!-- Submit -->
+        <div class="submit-div">
+          <button type="submit"
+                  class="submit-button"
+                  [disabled]="!this.resetForm.valid"
+                  mat-raised-button>Reset Password</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <div class="close">
+    <button type="button" mat-raised-button class="upload-button" (click)="onNoClick()"> Close Modal</button>
+  </div>
+
+</section>

@@ -11,12 +11,16 @@ export interface FileHandle {
 }
 
 export interface ImageResponse {
-  image_name: string;
+  name: string;
   media_type: string;
-  bytes_array: any;
+  bytes: any;
 }
 
 export interface Pageable {
   page: number;
   size: number;
+}
+
+export interface ResetPassword {
+  password: string;
 }

@@ -3,12 +3,13 @@
     <div class="down-icon">
       v
     </div>
-    <div class="img-container">
-      <img src="./assets/images/dummy.jpg" alt="profile picture">
+    <div class="img-container" *ngIf="profile_picture$ | async as picture">
+      <img [src]="picture.url" alt="profile picture">
     </div>
   </button>
   <div class="dropdown-content">
-    <a (click)="reset_password()">Reset password</a>
+    <a (click)="open_account_modal()">Add profile picture</a>
+    <a (click)="open_account_modal()">Reset password</a>
     <a (click)="logout()">Logout</a>
   </div>
 </div>

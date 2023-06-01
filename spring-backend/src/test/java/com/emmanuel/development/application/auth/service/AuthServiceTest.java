@@ -2,7 +2,7 @@ package com.emmanuel.development.application.auth.service;
 
 import com.emmanuel.development.application.auth.dto.AuthDTO;
 import com.emmanuel.development.application.auth.entity.AppUser;
-import com.emmanuel.development.application.auth.entity.CustomRoles;
+import com.emmanuel.development.application.auth.entity.CustomRole;
 import com.emmanuel.development.application.auth.repository.AppUserRepository;
 import com.emmanuel.development.application.exception.AlreadyExists;
 import jakarta.servlet.http.HttpServletRequest;
@@ -158,8 +158,8 @@ class AuthServiceTest {
         user.setLocked(true);
         user.setCredentialsNonExpired(true);
         user.setAccountNonExpired(true);
-        user.addRole(new CustomRoles(USER));
-        user.addRole(new CustomRoles(ADMIN));
+        user.addRole(new CustomRole(USER));
+        user.addRole(new CustomRole(ADMIN));
         return user;
     }
 

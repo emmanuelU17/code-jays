@@ -38,6 +38,11 @@
   color: var(--black);
 }
 
+.auth-display {
+  display: flex;
+  justify-content: right;
+}
+
 /**** Mobile view ****/
 @media only screen and (max-width: 900px) {
   .nav-container {
@@ -118,7 +123,6 @@
 
   .auth-display {
     width: 20%;
-    text-align: right;
   }
 }
 

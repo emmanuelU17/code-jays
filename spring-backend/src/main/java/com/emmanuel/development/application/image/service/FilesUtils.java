@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Service
 public class FilesUtils {
@@ -35,7 +36,18 @@ public class FilesUtils {
         imageEntity.setName(file.getOriginalFilename());
         imageEntity.setPath(filePath.toAbsolutePath().toString());
         imageEntity.setImage_type(Files.probeContentType(filePath.toAbsolutePath()));
-        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(inputStream, filePath, REPLACE_EXISTING);
+    }
+
+    /** Uploads user image to folder */
+    public String save_to_profile_folder(
+            InputStream inputStream,
+            Path uploadPath,
+            String fileName
+    ) throws IOException {
+        Path filePath = uploadPath.resolve(fileName);
+        Files.copy(inputStream, filePath, REPLACE_EXISTING);
+        return filePath.toAbsolutePath().toString();
     }
 
 }

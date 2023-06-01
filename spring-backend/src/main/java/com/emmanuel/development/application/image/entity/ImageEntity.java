@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table @Entity @NoArgsConstructor
-@Setter @Getter
+@Table @Entity @NoArgsConstructor @Setter @Getter
 public class ImageEntity {
 
     @Id

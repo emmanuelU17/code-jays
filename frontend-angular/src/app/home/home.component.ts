@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {FileHandle, Pageable} from "../../../util/util";
-import {HomeService} from "./service/file/home.service";
+import {HomeService} from "./service/home.service";
 import {DOCUMENT} from "@angular/common";
 import {Router} from "@angular/router";
 import {PageEvent} from "@angular/material/paginator";
@@ -16,7 +16,7 @@ export class HomeComponent {
 
   file_name: string = '';
 
-  file: File | null = null ;
+  file: File | null = null;
 
   upload$: Observable<any>;
 
@@ -82,20 +82,6 @@ export class HomeComponent {
     formData.append('file', this.file);
 
     this.upload$ = this.homeService.upload_image$(formData).pipe(
-      tap({
-        next: res => {
-          // If new image is uploaded, refresh component taking into consideration pagination
-          if (res.status >= 200 && res.status < 300) {
-            this.images$ = this.homeService.fetch_images$({
-              'page': this.page,
-              'size': this.size
-            });
-            this.file = null;
-            this.file_name = '';
-          }
-          // End of if
-        }
-      }),
       map(res => ({ res })),
       catchError(err => {
         // If 401 load auth component and expire cookie that validates if user is logged in.
@@ -104,14 +90,28 @@ export class HomeComponent {
           this.router.navigate(['/authentication']);
         }
         return of(err)
+      }),
+      tap({
+        next: res => {
+          // If new image is uploaded, refresh component taking into consideration pagination
+          if (res.status >= 200 && res.status < 300) {
+            // Refresh component
+            this.total$ = this.homeService.fetch_total_elements$();
+
+            // Refresh component
+            this.images$ = this.homeService.fetch_images$({
+              'page': this.page,
+              'size': this.size
+            });
+
+            // Update file
+            this.file = null;
+            this.file_name = '';
+          }
+          // End of if
+        }
       })
     );
-
-    this.upload$.subscribe({
-      next: res => {
-        console.log(res);
-      }
-    })
   }
 
 }

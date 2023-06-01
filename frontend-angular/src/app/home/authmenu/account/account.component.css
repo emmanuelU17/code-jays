@@ -1,0 +1,97 @@
+.account-component {
+  height: 100%;
+  padding: 5px;
+}
+
+.account-component, .profile-container, .password-container, .title-container,
+.form-div, .form, .form-details, .form-element, .submit-div, .close  {
+  width: 100%;
+}
+
+.profile-container {
+  padding: 10px;
+  border-bottom: var(--button-border);
+}
+
+.title-container {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-upload {
+  /*display: flex;*/
+}
+
+.upload-button {
+  background-color: var(--good-life);
+  color: var(--white);
+}
+
+.action-btn-ctn {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-details {
+  display: grid;
+}
+
+.form-element {
+  appearance: none;
+  outline: none;
+  border: none;
+  display: block;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background-color: var(--form-input-background);
+}
+
+.submit-div {
+  display: flex;
+  margin-top: 10px;
+}
+
+.submit-button {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.close {
+  padding: 5px;
+  text-align: right;
+}
+
+@media screen and (max-width: 600px) {
+  .form-details {
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 16px;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .form-details {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .action-btn-ctn {
+    gap: calc(2px + 1vw);
+  }
+
+  .file-upload, .upload-button {
+    font-size: calc(7px + 1vw) !important;
+  }
+}
+
+

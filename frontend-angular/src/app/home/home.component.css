@@ -53,10 +53,17 @@
   gap: 3px;
 }
 
+.toast {
+  background-color: red;
+  padding: 10px;
+}
+
 .pagination-container {
   padding: 5px;
-  text-align: center;
-  background-color: red;
+}
+
+.paginator {
+  margin: auto;
 }
 
 @media screen and (max-width: 300px) {
@@ -66,6 +73,12 @@
 
   .image-card {
     width: 130px;
+  }
+}
+
+@media screen and (max-width: 900px){
+  .file-upload, .upload-button {
+    font-size: calc(5px + 1vw) !important;
   }
 }
 
@@ -81,6 +94,7 @@
   .image-card {
     width: 120px;
   }
+
 }
 
 @media screen and (min-width: 901px) {
@@ -94,7 +108,7 @@
 }
 
 @media screen and (min-width: 1025px) {
-  .home-body-container, .home-footer-container, .pagination-container {
+  .home-body-container, .home-footer-container, .paginator {
     width: var(--main-body-width);
   }
 }

@@ -25,7 +25,9 @@
                   [ngStyle]="{ 'display': file_name.length > 0 ? 'block' : 'none'}" >Cancel</button>
         </div>
       </div>
-      <!-- end of add-image-container -->
+      <div class="toast" *ngIf="upload$ | async as upload">
+        <div *ngIf="upload.error">{{ upload.error.message }}</div>
+      </div>
 
       <div class="images-container">
         <div class="image-card" *ngFor="let image of images$ | async">
@@ -36,15 +38,17 @@
     </div>
   </section>
 
-  <div class="pagination-container" *ngIf="this.total$ | async as total" >
-    <mat-paginator
-      [length]="total"
-      [pageSize]="this.size"
-      [pageSizeOptions]="[5, 10, 20]"
-      aria-label="Select page"
-      (page)="changePage($event)"
-    ></mat-paginator>
-  </div>
+  <section class="pagination-container" *ngIf="this.total$ | async as total" >
+    <div class="paginator">
+      <mat-paginator
+        [length]="total"
+        [pageSize]="this.size"
+        [pageSizeOptions]="[5, 10, 20]"
+        aria-label="Select page"
+        (page)="changePage($event)"
+      ></mat-paginator>
+    </div>
+  </section>
 
   <section class="home-footer">
     <div class="home-footer-container">

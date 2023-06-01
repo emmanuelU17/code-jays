@@ -1,1 +1,12 @@
+### Get all images
 GET http://localhost:8080/api/v1/image
+
+
+### Register
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@admin.com",
+  "password": "password"
+}

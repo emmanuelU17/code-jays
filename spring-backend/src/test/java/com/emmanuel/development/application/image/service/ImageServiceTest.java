@@ -2,7 +2,6 @@ package com.emmanuel.development.application.image.service;
 
 import com.emmanuel.development.application.image.entity.ImageEntity;
 import com.emmanuel.development.application.image.repository.ImageRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,9 +42,6 @@ class ImageServiceTest {
     void setUp() {
         this.imageService = new ImageService(this.imageRepository, filesUtils);
     }
-
-    @AfterEach
-    void tearDown() { }
 
     @Test
     void upload_image() throws IOException {

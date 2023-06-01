@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {catchError, map, Observable, of, tap} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "./service/auth.service";
-import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-auth',
@@ -89,9 +88,8 @@ export class AuthComponent implements AfterViewInit {
   }
 
   /**
-   * This method parses signInFormValue to the service layer to send the user credentials to the server.
-   *
-   * @return void
+   * This method sends info gotten from the user to our serve to be authenticated. If response is a success, user is
+   * sent to home where he/she can access functionalities based on role.
    * */
   on_submit_login(): void {
     this.message = '';
