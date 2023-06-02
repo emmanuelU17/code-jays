@@ -121,6 +121,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>docker.io/emmanuelu17/${project.artifactId}:latest</name>
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

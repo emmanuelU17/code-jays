@@ -17,7 +17,9 @@ public class CorsConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200/")); // Angular
+        configuration.setAllowedOrigins(
+                List.of("http://localhost:4200/", "https://code-jays.web.app/",  "http://170.187.179.163:4200/")
+        ); // Angular
         configuration.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of(CONTENT_TYPE));
         configuration.setAllowCredentials(true);

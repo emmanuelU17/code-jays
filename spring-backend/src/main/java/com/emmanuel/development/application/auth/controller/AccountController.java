@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import static org.springframework.http.HttpStatus.OK;
 
 /** All routes are private. User has to be authenticated to access */
-@RestController @RequestMapping(path = "/api/v1/account")
+@RestController @RequestMapping(path = "api/v1/account")
 public class AccountController {
 
     private final AccountService accountService;

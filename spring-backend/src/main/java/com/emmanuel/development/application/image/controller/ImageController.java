@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import static org.springframework.http.HttpStatus.OK;
 
-@RestController @RequestMapping(path = "/api/v1/image")
+@RestController @RequestMapping(path = "api/v1/image")
 public class ImageController {
 
     private final ImageService imageService;
