@@ -106,7 +106,6 @@ public class AccountService {
     public String password_reset(String password) {
         String principal = SecurityContextHolder.getContext().getAuthentication().getName();
         this.appUserRepository.updatePassword(principal, passwordEncoder.encode(password));
-
         delete_sessions(SecurityContextHolder.getContext().getAuthentication());
         return "Password changed!";
     }

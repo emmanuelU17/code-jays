@@ -1,6 +1,8 @@
 package com.emmanuel.development.application.auth.controller;
 
+import com.emmanuel.development.application.auth.dto.ResetDTO;
 import com.emmanuel.development.application.auth.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +44,12 @@ public class AccountController {
     /**
      * Allows resetting a user password.
      *
-     * @param password - accepts a password from UI
+     * @param dto - is an ResetDTO where I am accepting a json param from UI
      * @return ResponseEntity of type String
      * */
-    @PutMapping
-    public ResponseEntity<?> password_reset(@Param(value = "password") String password) {
-        return new ResponseEntity<>(this.accountService.password_reset(password), OK);
+    @PutMapping(consumes = "application/json")
+    public ResponseEntity<?> password_reset(@Valid @RequestBody ResetDTO dto) {
+        return new ResponseEntity<>(this.accountService.password_reset(dto.password()), OK);
     }
 
 }

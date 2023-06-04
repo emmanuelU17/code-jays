@@ -2,7 +2,6 @@ package com.emmanuel.development.application.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.session.FindByIndexNameSessionRepository;
@@ -28,22 +27,9 @@ public class CustomLogoutHandler implements LogoutHandler {
      * */
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        HttpSession requestSession = request.getSession(false);
-
-        if (requestSession != null) {
-            String sessionID = requestSession.getId();
-            boolean bool = this.sessionRepository
-                    .findById(sessionID) //
-                    .getAttributeOrDefault(
-                            FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME,
-                            authentication.getName()
-                    ) //
-                    .isEmpty();
-
-            // Validate the user requesting to log out is actually the user
-            if (!bool) {
-                this.sessionRepository.deleteById(sessionID);
-            }
+        String id = request.getSession(false).getId();
+        if (id != null && this.sessionRepository.findById(id) != null) {
+            this.sessionRepository.deleteById(id);
         }
     }
 

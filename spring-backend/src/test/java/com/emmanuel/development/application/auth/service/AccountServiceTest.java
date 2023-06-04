@@ -60,7 +60,7 @@ class AccountServiceTest {
         );
     }
 
-    // TODO Make more efficient
+    // For this test to pass, uploads folder has to be created.
     @Test
     void get_profile_picture() {
         // Given

@@ -58,11 +58,15 @@ export class AccountComponent {
 
   /** Method responsible for uploading user profile picture */
   upload_profile_picture(): void {
-    this.picture$ = this.authMenuService.upload_profile_picture$().pipe(tap({
+    if (this.file === null)
+      return;
+
+    const formData: FormData = new FormData();
+    formData.append('file', this.file);
+
+    this.picture$ = this.authMenuService.upload_profile_picture$(formData).pipe(tap({
       next: res => {
-        console.log('Resz ', res);
-        if (res.status >= 200 && res.status <= 300) {
-          console.log('Hit')
+        if (res >= 200 && res <= 300) {
           this.onNoClick();
           this.authMenuService.set_profile_update(true);
         }
@@ -76,8 +80,7 @@ export class AccountComponent {
       this.message = "Passwords do not match";
       return;
     }
-
-    this.reset_password$ = this.authMenuService.reset_password(this.resetForm.get('password')?.value);
+    this.reset_password$ = this.authMenuService.reset_password(this.resetForm.value);
   }
 
 }

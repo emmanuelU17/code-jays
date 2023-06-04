@@ -64,6 +64,7 @@
 
         <div class="toast" *ngIf="message.length > 0">{{ message }}</div>
         <div class="toast" *ngIf="reset_password$ | async as reset_password">
+          Reset
           <div *ngIf="reset_password.error">{{ reset_password.error.message }}</div>
         </div>
 

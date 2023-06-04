@@ -1,36 +1,38 @@
 version: '3.9'
 services:
 
-  angular:
-    container_name: "angular"
-    image: "emmanuelu17/frontend-angular:latest"
-    ports:
-      - 4200:80
-    volumes:
-      - ./frontend-angular:/project
-      - /project/node_modules
-    networks:
-      - angular-spring
-    links:
-      - backend
+#  angular:
+#    container_name: "angular"
+#    image: "emmanuelu17/frontend-angular:latest"
+#    ports:
+#      - 4200:80
+#    volumes:
+#      - ./frontend-angular:/project
+#      - /project/node_modules
+#    networks:
+#      - angular-spring
+#    links:
+#      - backend
 
   # API
-  backend:
-    container_name: api
-    image: "emmanuelu17/spring-backend:latest"
-    ports:
-      - "8080:8080"
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      SPRING_PROFILES_ACTIVE: $ACTIVE_PROFILE
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/$DATABASE_NAME
-      SPRING_DATASOURCE_USERNAME: $DATABASE_USER
-      SPRING_DATASOURCE_PASSWORD: $DATABASE_PASSWORD
-    networks:
-      - spring-mysql
-      - angular-spring
+#  backend:
+#    container_name: api
+#    image: "emmanuelu17/spring-backend:latest"
+#    ports:
+#      - ${PORT}:${PORT}
+#    depends_on:
+#      db:
+#        condition: service_healthy
+#    environment:
+#      SPRING_PROFILES_ACTIVE: $ACTIVE_PROFILE
+#      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/$DATABASE_NAME
+#      SPRING_DATASOURCE_USERNAME: $DATABASE_USER
+#      SPRING_DATASOURCE_PASSWORD: $DATABASE_PASSWORD
+#      SERVER_PORT: $PORT
+#      SERVER_SERVLET_SESSION_COOKIE_DOMAIN: $COOKIE_DOMAIN
+#    networks:
+#      - spring-mysql
+#      - angular-spring
 
   # MySQL server
   db:

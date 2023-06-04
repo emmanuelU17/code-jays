@@ -1,4 +1,4 @@
-# Code Jays Full Stack Developer
+# Code Jays Full Stack Developer questions
 
 * Develop a Spring API adhering to the following principles: Clean Architecture, Domain Driven Design, and Test Driven 
 Design. Ensure compliance with language conventions and incorporate SOLID and Design Patterns appropriately throughout 
@@ -13,6 +13,11 @@ backend code (unit tests), while the UI does not require unit tests.
 ### Production link
 * [link](https://emmanueluluabuike.com/)
 
+### App functionalities
+* Authentication and Authorization
+* Image uploading
+* Password reset
+* Personal Profile update
 
 ## Technologies
 ### Frontend
@@ -22,4 +27,4 @@ backend code (unit tests), while the UI does not require unit tests.
 * Spring Boot
 * MySQL
 * Flyway Migration
-* Docker for containerization
+* Docker for containerization and easy deployment

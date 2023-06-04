@@ -13,7 +13,7 @@ export interface FileHandle {
 export interface ImageResponse {
   name: string;
   media_type: string;
-  bytes: any;
+  bytes: string;
 }
 
 export interface Pageable {
@@ -23,4 +23,5 @@ export interface Pageable {
 
 export interface ResetPassword {
   password: string;
+  confirm_password: string;
 }

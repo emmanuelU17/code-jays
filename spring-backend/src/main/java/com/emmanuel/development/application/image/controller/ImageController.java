@@ -22,7 +22,7 @@ public class ImageController {
         return this.imageService.upload_image(file);
     }
 
-    @GetMapping(produces = "application/json")
+    @GetMapping(path = "/all", produces = "application/json")
     public ResponseEntity<?> fetch_images (
             @RequestParam(name = "page", defaultValue = "0") Integer page,
             @RequestParam(name = "size", defaultValue = "10") Integer size

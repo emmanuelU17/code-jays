@@ -3,8 +3,9 @@
     <div class="down-icon">
       v
     </div>
-    <div class="img-container" *ngIf="profile_picture$ | async as picture">
-      <img [src]="picture.url" alt="profile picture">
+    <div class="img-container" *ngIf="authMenuService.isAuthenticated() | async as authenticated"
+         [ngStyle]="{ 'display': authenticated ? 'flex' : 'none' }">
+      <img [src]="safeUrl" alt="profile picture">
     </div>
   </button>
   <div class="dropdown-content">

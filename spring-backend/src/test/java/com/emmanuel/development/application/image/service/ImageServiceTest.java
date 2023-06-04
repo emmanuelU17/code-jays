@@ -98,7 +98,7 @@ class ImageServiceTest {
     }
 
     @Test
-    void error_saving_image() throws IOException, NoSuchMethodException {
+    void error_saving_image() throws IOException {
         // Given
         MockMultipartFile file = new MockMultipartFile(
                 "file",

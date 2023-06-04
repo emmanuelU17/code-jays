@@ -139,7 +139,7 @@ class AuthControllerTest {
 
         // Logout
         this.MOCK_MVC
-                .perform(post("/api/v1/auth/logout").cookie(cookie))
+                .perform(get("/api/v1/auth/logout").cookie(cookie))
                 .andExpect(status().isOk());
 
         // Verify cookie is invalid

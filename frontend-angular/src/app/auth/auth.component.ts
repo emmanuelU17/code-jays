@@ -78,7 +78,6 @@ export class AuthComponent implements AfterViewInit {
       catchError(err => of(err)),
       tap({
         next: res => {
-          console.log(res);
           if (res.status >= 200 && res.status < 300) {
             this.registerForm.reset();
           }

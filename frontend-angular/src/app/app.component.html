@@ -22,7 +22,7 @@
     <!--  End of nav-links  -->
 
     <div class="auth-display"
-         [ngStyle]="{ 'display': (authService._isLoggedIn$() && authService._isAdmin$() | async) ? 'flex' : 'none' }">
+         [ngStyle]="{ 'display': (authService._isLoggedIn$() | async) ? 'flex' : 'none' }">
       <app-auth-menu></app-auth-menu>
     </div>
     <!--  End of auth display  -->

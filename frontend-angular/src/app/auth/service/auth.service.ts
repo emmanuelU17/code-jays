@@ -78,7 +78,7 @@ export class AuthService {
   register(obj: any): Observable<any> {
     return this
       .http
-      .post<AuthResponse>(this.HOST + "/api/v1/auth/register", JSON.stringify(obj),
+      .post<AuthResponse>(this.HOST + "api/v1/auth/register", JSON.stringify(obj),
         {
           headers: { 'content-type': 'application/json' },
           observe: 'body',
@@ -99,7 +99,7 @@ export class AuthService {
     return this
       .http
       .post<AuthResponse>(
-        this.HOST + "/api/v1/auth/login", JSON.stringify(obj),
+        this.HOST + "api/v1/auth/login", JSON.stringify(obj),
         {
           headers: { 'content-type': 'application/json' },
           observe: 'response',

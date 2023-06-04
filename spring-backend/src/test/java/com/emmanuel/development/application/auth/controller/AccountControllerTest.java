@@ -1,6 +1,7 @@
 package com.emmanuel.development.application.auth.controller;
 
 import com.emmanuel.development.application.auth.dto.AuthDTO;
+import com.emmanuel.development.application.auth.dto.ResetDTO;
 import com.emmanuel.development.application.auth.repository.AppUserRepository;
 import com.emmanuel.development.application.auth.service.AuthService;
 import jakarta.servlet.http.Cookie;
@@ -139,10 +140,11 @@ class AccountControllerTest {
         // Change password
         String new_password = "developer";
         this.MOCK_MVC
-                .perform(put("/api/v1/account").param("password", new_password)
+                .perform(put("/api/v1/account")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ResetDTO(new_password).convertToJSON().toString())
                         .cookie(cookie)
                 )
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string("Password changed!"));
 

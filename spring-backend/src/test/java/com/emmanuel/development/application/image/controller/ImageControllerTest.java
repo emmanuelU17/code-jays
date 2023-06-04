@@ -91,7 +91,7 @@ class ImageControllerTest {
     @Test
     void fetch_images() throws Exception {
         this.MOCK_MVC
-                .perform(get("/api/v1/image")
+                .perform(get("/api/v1/image/all")
                         .param("page", String.valueOf(0))
                         .param("page", String.valueOf(10))
                 )

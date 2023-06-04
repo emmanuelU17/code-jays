@@ -81,12 +81,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(
-                            "/api/v1/auth/register",
-                            "/api/v1/auth/login",
-                            "/api/v1/image/**",
-                            "/api/v1/image"
-                    ).permitAll();
+                    auth.requestMatchers("/api/v1/image").permitAll();
+                    auth.requestMatchers("/api/v1/image/**").permitAll();
+                    auth.requestMatchers("/api/v1/auth/register", "/api/v1/auth/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManagement -> sessionManagement
@@ -98,9 +95,9 @@ public class SecurityConfig {
                 .exceptionHandling((ex) -> ex.authenticationEntryPoint(this.authEntryPoint))
                 .logout(out -> out
                         .logoutUrl("/api/v1/auth/logout")
+                        .addLogoutHandler(new CustomLogoutHandler(this.sessionRepository))
                         .invalidateHttpSession(true) // Invalidate all sessions after logout
                         .deleteCookies(HTTP_TRUE_COOKIE, HTTP_FALSE_COOKIE)
-                        .addLogoutHandler(new CustomLogoutHandler(this.sessionRepository))
                         .logoutSuccessHandler((request, response, authentication) ->
                                 SecurityContextHolder.clearContext()
                         )
